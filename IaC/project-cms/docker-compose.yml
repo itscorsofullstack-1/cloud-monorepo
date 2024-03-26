@@ -4,6 +4,8 @@ services:
   db:
     image: mysql:8.3
     restart: always
+    env_file:
+      - ../../.env
     environment:
       MYSQL_DATABASE: $MYSQL_DATABASE
       MYSQL_USER: $MYSQL_USER
@@ -14,6 +16,8 @@ services:
       - db
     image: wordpress:6.4.3
     restart: always
+    env_file:
+      - ../../.env
     environment:
       WORDPRESS_MYSQL_HOST: db:3306
       WORDPRESS_MYSQL_NAME: $MYSQL_DATABASE
