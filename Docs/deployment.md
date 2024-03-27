@@ -47,7 +47,7 @@ wordpress: Utilizza l'immagine WordPress ufficiale. Dipende dal servizio MySQL (
 # 2. Avvio dei container Docker
 
 1. Dentro la cartella "project-cms" eseguire ```docker-compose up -d ```
- per avviare i container in background (-d).
+ per avviare i container in background (dato dal comando -d).
 
 # 3. Accesso al CMS WordPress
 
