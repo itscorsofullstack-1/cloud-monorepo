@@ -39,7 +39,7 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: password
       WORDPRESS_DB_NAME: wordpress
-   depends_on:
+   :qdepends_on:
       - mysql 
   db:
     image: mysql:8
