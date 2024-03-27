@@ -1,24 +1,33 @@
-version: '3.8'
+   services:
+     db:
+       container_name: db
+       hostname: db
+       networks:
+         - my_network
+       image: mysql:8
+       restart: always
+       environment:
+         MYSQL_ROOT_PASSWORD: example_password
+         MYSQL_DATABASE: wordpress
+         MYSQL_USER: wordpress_user
+         MYSQL_PASSWORD: wordpress_password
 
-services:
-  db:
-    image: mysql:8
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: example_password
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress_user
-      MYSQL_PASSWORD: wordpress_password
+     wordpress:
+       container_name: wordpress
+       hostname: wordpress
+       networks:
+         - my_network
+       depends_on:
+         - db
+       image: wordpress:latest
+       restart: always
+       ports:
+         - "8080:80"
+       environment:
+         WORDPRESS_DB_HOST: db:3306
+         WORDPRESS_DB_USER: wordpress_user
+         WORDPRESS_DB_PASSWORD: wordpress_password
+         WORDPRESS_DB_NAME: wordpress
 
-  wordpress:
-    depends_on:
-      - db
-    image: wordpress:latest
-    restart: always
-    ports:
-      - "8080:80"
-    environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: wordpress_user
-      WORDPRESS_DB_PASSWORD: wordpress_password
-      WORDPRESS_DB_NAME: wordpress
+networks:
+  my_network:
