@@ -3,20 +3,31 @@ version: '3'
 services:
   mysql:
     image: "mysql:8.0"
+    labels:
+      com.example.description: "Database MySQL per WordPress"
+      com.example.version: "1.0"
     environment:
       MYSQL_ROOT_PASSWORD: "password"
       MYSQL_DATABASE: "wordpress"
     volumes:
       - mysql_data:/var/lib/mysql
+
   wordpress:
+    container_name: wordpress_container
+    hostname: wordpress_host
     image: "wordpress:latest"
     ports:
-      - "80:80"
+      - "8000:80"
     volumes:
       - wordpress_data:/var/www/html
     depends_on:
       - mysql
+    networks:
+      - webnet
 
 volumes:
   mysql_data:
   wordpress_data:
+
+networks:
+  webnet:
