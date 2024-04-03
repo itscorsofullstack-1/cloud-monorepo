@@ -7,12 +7,12 @@ services:
       - "8000:80"  # Mappa la porta 80 del container di WordPress alla porta 8000 del host
     restart: always
     environment:
-      WORDPRESS_DB_HOST: db_wordpress_cloudrepo
+      WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: gianpaoloits
       WORDPRESS_DB_PASSWORD: 1q2w3e4r5t
       WORDPRESS_DB_NAME: gianpaoloits_db
     depends_on:
-      - mysql
+      - db
   db:
     image: mysql:8
     restart: always

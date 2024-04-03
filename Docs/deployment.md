@@ -25,6 +25,9 @@ mkdir project-cms
 Per creare l'ambiente containerizzato di WordPress, è necessario un file docker-compose.yml all'interno della directory
 project-cms.
 
+## Configurazioni del File docker-compose.yml
+Il file docker-compose.yml contiene le configurazioni per i servizi WordPress e MySQL. Il servizio WordPress utilizza l'immagine ufficiale di WordPress e il servizio MySQL utilizza l'immagine ufficiale di MySQL 8.0. Entrambi i servizi sono configurati per riavviarsi sempre. Il servizio WordPress è esposto sulla porta 8080, mentre il servizio MySQL non è esposto su nessuna porta perché comunica con il servizio WordPress attraverso una rete interna.
+
 ```yaml
 version: '3.8'
 
@@ -89,6 +92,44 @@ Bisogna far ripartire il container e lo rifacciamo con questo comando bash, all'
 ```bash
 docker compose-up
 ```
+Vado a creare due cartelle 'nginx' e 'ssl_certificates', dove all'interno della cartella di nginx ci metterò il 'Dockerfile' ed il 'nginx.conf' e nella cartella
+'ssl_certificates' andrò a creare il certificato autofirmato
 
-## Configurazioni del File docker-compose.yml
-Il file docker-compose.yml contiene le configurazioni per i servizi WordPress e MySQL. Il servizio WordPress utilizza l'immagine ufficiale di WordPress e il servizio MySQL utilizza l'immagine ufficiale di MySQL 8.0. Entrambi i servizi sono configurati per riavviarsi sempre. Il servizio WordPress è esposto sulla porta 8080, mentre il servizio MySQL non è esposto su nessuna porta perché comunica con il servizio WordPress attraverso una rete interna.
+Per generare un certificato SSL ed una chiave privata, per crearo utilizzo questo comando su bash:
+
+```bash
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx.key -out nginx.crt
+```
+
+Con questo comando si andrà a creare un certificato autofirmato di nome 'nginx.crt' ed una chiave privata 'nginx.key'
+
+Si crea un file di configurazione per Nginx che definisca il reverse proxy e la gestione SSL creando un file nginx.conf:
+
+```bash
+vi nginx.conf
+```
+
+e lo modifico con:
+
+```bash
+vim nginx.conf
+```
+
+e ci inserisco questo:
+
+```nginx.conf
+server {
+    listen 443 ssl;
+    server_name xpipe-ecommerce.local;
+
+    ssl_certificate /nginx/nginx.crt;
+    ssl_certificate_key /nginx/nginx.key;
+
+    location / {
+        proxy_pass http://your_upstream_server;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
