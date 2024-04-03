@@ -6,6 +6,13 @@ Clonare la repository tramite il comando bash:
 git clone https://github.com/itscorsofullstack-1/cloud-monorepo.git
 ```
 
+Andare nella branch `feature-lucapitzoi` e copiare la branch con `git checkout -b soluzione-NomeCognome`
+
+# Windows - aprire prompt come amministratore e poi aprire il file con notepad.exe
+# C:\Windows\System32\drivers\etc\hosts
+
+aggiungendo all'indirizzo 127.0.0.1	cms.sindriaschool.org tramite modifica
+
 Navigare nella cartella `IaC/project-cms`.
 
 ```bash
