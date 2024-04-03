@@ -64,6 +64,7 @@ services:
     container_name: "ingress-controller"
     volumes:
       - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}/ssl:/etc/nginx/ssl"
+      - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}/certs:/etc/nginx/certs"
       - "${BASE_PATH}/${PROJECT_PATH}/${CODE_PATH}/rules:/etc/nginx/conf.d"
     hostname: "ingress-controller.local"
     ports:
