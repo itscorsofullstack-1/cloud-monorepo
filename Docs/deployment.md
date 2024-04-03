@@ -67,5 +67,28 @@ Per verificare direttamente le caratteristiche di un singolo container
 docker inspect <container_id>
 ```
 
+Per fermare un container utilizziamo il comando su bash:
+
+```bash
+docker stop <container_id_o_nome>
+```
+
+Bisogna elencare tutte le images Docker e per vederli utilizzo questo comando su bash:
+
+```bash
+docker images
+```
+Bisogna cancellare tutte le immagini Docker collegare presenti nel nel sistema ed utilizzo questo comando su bash:
+
+```bash
+docker rmi <ID_immagine>
+```
+
+Bisogna far ripartire il container e lo rifacciamo con questo comando bash, all'interno della cartella dov'è il docker-compose.yml:
+
+```bash
+docker compose-up
+```
+
 ## Configurazioni del File docker-compose.yml
 Il file docker-compose.yml contiene le configurazioni per i servizi WordPress e MySQL. Il servizio WordPress utilizza l'immagine ufficiale di WordPress e il servizio MySQL utilizza l'immagine ufficiale di MySQL 8.0. Entrambi i servizi sono configurati per riavviarsi sempre. Il servizio WordPress è esposto sulla porta 8080, mentre il servizio MySQL non è esposto su nessuna porta perché comunica con il servizio WordPress attraverso una rete interna.
