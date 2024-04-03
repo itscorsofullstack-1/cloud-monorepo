@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  wordpress:
+    image: wordpress
+    ports:
+      - "8000:80"  # Mappa la porta 80 del container di WordPress alla porta 8000 del host
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: gianpaoloits
+      WORDPRESS_DB_PASSWORD: 1q2w3e4r5t
+      WORDPRESS_DB_NAME: gianpaoloits_db
+    depends_on:
+      - db
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpress_gianpaoloits
+      MYSQL_USER: gianpaoloits
+      MYSQL_PASSWORD: 1q2w3e4r5tsqlpsw
+      MYSQL_ROOT_PASSWORD: 1q2w3e4r5t
