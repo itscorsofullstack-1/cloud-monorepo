@@ -1,0 +1,8 @@
+### ITS Hosts ###
+127.0.0.1	cms.sindriaschool.org
+
+# Windows - aprire prompt come amministratore e poi aprire il file con notepad.exe
+# C:\Windows\System32\drivers\etc\hosts
+
+# Unix sudo su oppure sudo vim /etc/hosts
+# /etc/hosts
