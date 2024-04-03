@@ -17,7 +17,7 @@ networking:
 nodes:
 - role: control-plane
   extraMounts:
-  - hostPath: /Users/lucapitzoi/Projects/ITS/itscorsofullstack-1/cloud-monorepo/Lab/xpipe-lab/src/resources
+  - hostPath: /Users/mele/Scuola/SECONDOANNO23-24/Cloud/cloud-monorepo/Lab/xpipe-lab/src/resources
     containerPath: /resources
   # port forward 80 on the host to 80 on this node
   #extraPortMappings:
@@ -35,7 +35,7 @@ nodes:
   #- hostPath: /path/to/my/files
   #  containerPath: /files
   extraMounts:
-  - hostPath: /Users/lucapitzoi/Projects/ITS/itscorsofullstack-1/cloud-monorepo/Lab/xpipe-lab/data
+  - hostPath: /Users/mele/Scuola/SECONDOANNO23-24/Cloud/cloud-monorepo/Lab/xpipe-lab/data
     containerPath: /data
   # port forward 80 on the host to 80 on this node
   #extraPortMappings:
